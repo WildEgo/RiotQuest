@@ -163,17 +163,22 @@ class Request
 
             $token = Application::getInstance()->getKeys()[$this->get('key')];
 
+            $data = [
+                'body' => json_encode($this->get('body')),
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'X-Riot-Token' => $token->getKey()
+                ],
+                'http_errors' => false
+            ];
+
+            $proxy = Application::getInstance()->getProxy();
+            if(isset($proxy) && $proxy) $data['proxy'] = $proxy;
+
             $res = (new Client())->request(
                 $this->get('method'),
                 $this->get('destination'),
-                [
-                    'body' => json_encode($this->get('body')),
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'X-Riot-Token' => $token->getKey()
-                    ],
-                    'http_errors' => false
-                ]
+                $data
             );
 
             $rl = Application::getInstance()->getManager();

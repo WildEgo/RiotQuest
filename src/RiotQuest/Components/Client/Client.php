@@ -37,6 +37,12 @@ class Client
         Application::getInstance()->setLogging(false);
     }
 
+    public static function proxy($proxy = false): void
+    {
+        if($proxy)
+        Application::getInstance()->setProxy($proxy);
+    }
+
     /**
      * Change the default logger implementation
      *
@@ -179,4 +185,3 @@ class Client
     }
 
 }
-                                                                                                           

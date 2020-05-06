@@ -75,6 +75,11 @@ class Application
     protected $locale = "en_US";
 
     /**
+     * @var array
+     */
+    protected $proxy = false;
+
+    /**
      * Application Singleton
      *
      * @var Application
@@ -235,6 +240,22 @@ class Application
     public function setLocale($locale): void
     {
         $this->locale = $locale;
+    }
+
+    /**
+     * @return bool|array
+     */
+    public function getProxy()
+    {
+        return $this->proxy;
+    }
+
+    /**
+     * @param array $proxy
+     */
+    public function setProxy(array $proxy): void
+    {
+        $this->proxy = $proxy;
     }
 
     /**
